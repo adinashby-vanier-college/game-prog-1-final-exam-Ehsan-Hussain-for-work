@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=GameWonWorld
+comment0.text=\r\n\ \r\n
+comment1.params=
+comment1.target=GameWonWorld()
+comment1.text=\r\n\ Constructor\ -\ shows\ the\ messege\ of\ showTextWithBigBlackFont\ and\ plays\ the\ appropreat\ sound\ effect.\r\n
+comment2.params=message\ x\ y
+comment2.target=void\ showTextWithBigBlackFont(java.lang.String,\ int,\ int)
+comment2.text=\r\n\ showTextWithBigBlackFont\ -\ sets\ the\ conditions\ of\ the\ text\ on\ screen.\r\n
+numComments=3
