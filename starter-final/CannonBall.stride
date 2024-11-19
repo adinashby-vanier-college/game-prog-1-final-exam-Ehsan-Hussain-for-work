@@ -1,19 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<class name="CannonBall" extends="Actor" enable="true" strideversion="1">
-    <javadoc xml:space="preserve"/>
+<class name="CannonBall" extends="Actor" extends-java="Actor" enable="true" strideversion="1">
+    <javadoc xml:space="preserve">Write a description of class CannonBall here.
+@author (your name) @version (a version number or a date)</javadoc>
     <imports>
-        <import target="java.util.*" enable="true"/>
         <import target="greenfoot.*" enable="true"/>
     </imports>
     <implements/>
-    <fields/>
-    <constructors/>
-    <methods>
-        <method access="public" type="void" name="act" enable="true">
-            <javadoc xml:space="preserve">Act - do whatever the CannonBall wants to do. This method is called whenever the 'Act' or 'Run' button gets pressed in the environment.</javadoc>
+    <fields>
+        <comment xml:space="preserve">(World, Actor, GreenfootImage, Greenfoot and MouseInfo)</comment>
+        <variable access="private" type="Point2D" type-java="Point2D" name="position" enable="true"/>
+        <variable access="private" type="Vector2D" type-java="Vector2D" name="velocity" enable="true"/>
+        <variable access="private" type="Vector2D" type-java="Vector2D" name="acceleration" enable="true"/>
+    </fields>
+    <constructors>
+        <comment xml:space="preserve">200 pixels is 1 meter</comment>
+        <constructor access="public" enable="true">
+            <javadoc xml:space="preserve"/>
             <params/>
             <throws/>
-            <body/>
+            <body>
+                <assign dest="position" dest-java="position" src="null" src-java="null" enable="true"/>
+                <assign dest="velocity" dest-java="velocity" src="new Vector2D(0.0,0.0)" src-java=" new Vector2D(0.0, 0.0)" enable="true"/>
+            </body>
+        </constructor>
+    </constructors>
+    <methods>
+        <method access="public" type="void" type-java="void" name="act" enable="true">
+            <javadoc xml:space="preserve"/>
+            <params/>
+            <throws/>
+            <body>
+                <call expression="updatePhysics()" expression-java="updatePhysics()" enable="true"/>
+            </body>
+        </method>
+        <method access="public" type="void" type-java="void" name="setVelocity" enable="true">
+            <javadoc xml:space="preserve"/>
+            <params>
+                <params type="Vector2D" type-java="Vector2D" name="newValue"/>
+            </params>
+            <throws/>
+            <body>
+                <assign dest="velocity" dest-java="velocity" src="newValue" src-java="newValue" enable="true"/>
+            </body>
+        </method>
+        <method access="public" type="void" type-java="void" name="updatePhysics" enable="true">
+            <javadoc xml:space="preserve"/>
+            <params/>
+            <throws/>
+            <body>
+                <comment xml:space="preserve">Initial position</comment>
+                <if condition="position==null" condition-java="position == null" enable="true">
+                    <ifStatements>
+                        <assign dest="position" dest-java="position" src="new Point2D(getX(),getY())" src-java=" new Point2D(getX(), getY())" enable="true"/>
+                    </ifStatements>
+                </if>
+                <comment xml:space="preserve">Get time step duration</comment>
+                <variable type="MyWorld" type-java="MyWorld" name="world" value="(MyWorld)getWorld()" value-java="(MyWorld)getWorld()" enable="true"/>
+                <variable type="double" type-java="double" name="dt" value="world.getTimeStepDuration()" value-java="world.getTimeStepDuration()" enable="true"/>
+                <comment xml:space="preserve">Update position</comment>
+                <variable type="Vector2D" type-java="Vector2D" name="positionVariation" value="Vector2D.multiply(velocity,dt)" value-java="Vector2D.multiply(velocity, dt)" enable="true"/>
+                <call expression="position.add(positionVariation)" expression-java="position.add(positionVariation)" enable="true"/>
+                <comment xml:space="preserve">Set new actor position</comment>
+                <call expression="setLocation((int)position.getX(),(int)position.getY())" expression-java="setLocation((int)position.getX(), (int)position.getY())" enable="true"/>
+            </body>
         </method>
     </methods>
 </class>

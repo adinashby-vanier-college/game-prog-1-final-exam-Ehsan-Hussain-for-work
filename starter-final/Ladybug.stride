@@ -13,7 +13,98 @@
             <javadoc xml:space="preserve">Act - do whatever the Hero wants to do. This method is called whenever the 'Act' or 'Run' button gets pressed in the environment.</javadoc>
             <params/>
             <throws/>
-            <body/>
+            <body>
+                <call expression="mover()" expression-java="mover()" enable="true"/>
+                <if condition="isGameWon()" condition-java="isGameWon()" enable="true">
+                    <ifStatements>
+                        <call expression="transitionToGameWonWorld()" expression-java="transitionToGameWonWorld()" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="isGameOver()" condition-java="isGameOver()" enable="true">
+                    <ifStatements>
+                        <call expression="transitionToGameOverWorld()" expression-java="transitionToGameOverWorld()" enable="true"/>
+                    </ifStatements>
+                </if>
+            </body>
+        </method>
+        <method access="public" type="void" type-java="void" name="mover" enable="true">
+            <javadoc xml:space="preserve">mover - makes the Hero move or turn in the direction that the player presses on, using the arrow keys.</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <if condition="Greenfoot.isKeyDown(&quot;up&quot;)" condition-java="Greenfoot.isKeyDown(&quot;up&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="move(4)" expression-java="move(4)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="Greenfoot.isKeyDown(&quot;left&quot;)" condition-java="Greenfoot.isKeyDown(&quot;left&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="turn(-4)" expression-java="turn(-4)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="Greenfoot.isKeyDown(&quot;down&quot;)" condition-java="Greenfoot.isKeyDown(&quot;down&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="move(-4)" expression-java="move(-4)" enable="true"/>
+                    </ifStatements>
+                </if>
+                <if condition="Greenfoot.isKeyDown(&quot;right&quot;)" condition-java="Greenfoot.isKeyDown(&quot;right&quot;)" enable="true">
+                    <ifStatements>
+                        <call expression="turn(4)" expression-java="turn(4)" enable="true"/>
+                    </ifStatements>
+                </if>
+            </body>
+        </method>
+        <method access="public" type="boolean" type-java="boolean" name="isGameWon" enable="true">
+            <javadoc xml:space="preserve">isGameWon - checks if the Ladybug hits the FinishLocation.</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="World" type-java="World" name="world" value="getWorld()" value-java="getWorld()" enable="true"/>
+                <variable type="FinishLocation" type-java="FinishLocation" name="a" value="(FinishLocation)getOneIntersectingObject(FinishLocation.class)" value-java="(FinishLocation)getOneIntersectingObject(FinishLocation.class)" enable="true"/>
+                <if condition="a!=null" condition-java="a != null" enable="true">
+                    <ifStatements>
+                        <return value="true" value-java="true" enable="true"/>
+                    </ifStatements>
+                    <else>
+                        <return value="false" value-java="false" enable="true"/>
+                    </else>
+                </if>
+            </body>
+        </method>
+        <method access="public" type="void" type-java="void" name="transitionToGameWonWorld" enable="true">
+            <javadoc xml:space="preserve">transitionToGameWonWorld - shows the player to the win screen.</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="World" type-java="World" name="gameWonWorld" value="new GameWonWorld()" value-java=" new GameWonWorld()" enable="true"/>
+                <call expression="Greenfoot.setWorld(gameWonWorld)" expression-java="Greenfoot.setWorld(gameWonWorld)" enable="true"/>
+            </body>
+        </method>
+        <method access="public" type="boolean" type-java="boolean" name="isGameOver" enable="true">
+            <javadoc xml:space="preserve">isGameOver - checks if the Ladybug hits a CannonBall.</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="World" type-java="World" name="world" value="getWorld()" value-java="getWorld()" enable="true"/>
+                <variable type="CannonBall" type-java="CannonBall" name="b" value="(CannonBall)getOneIntersectingObject(CannonBall.class)" value-java="(CannonBall)getOneIntersectingObject(CannonBall.class)" enable="true"/>
+                <if condition="b!=null" condition-java="b != null" enable="true">
+                    <ifStatements>
+                        <return value="true" value-java="true" enable="true"/>
+                    </ifStatements>
+                    <else>
+                        <return value="false" value-java="false" enable="true"/>
+                    </else>
+                </if>
+            </body>
+        </method>
+        <method access="public" type="void" type-java="void" name="transitionToGameOverWorld" enable="true">
+            <javadoc xml:space="preserve">transitionToGameOverWorld - shows the player to the losing screen.</javadoc>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="World" type-java="World" name="gameOverWorld" value="new GameOverWorld()" value-java=" new GameOverWorld()" enable="true"/>
+                <call expression="Greenfoot.setWorld(gameOverWorld)" expression-java="Greenfoot.setWorld(gameOverWorld)" enable="true"/>
+            </body>
         </method>
     </methods>
 </class>

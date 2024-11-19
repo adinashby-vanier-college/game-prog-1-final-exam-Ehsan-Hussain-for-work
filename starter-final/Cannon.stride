@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class name="Cannon" extends="Actor" extends-java="Actor" enable="true" strideversion="1">
+    <javadoc xml:space="preserve">Write a description of class Cannon here.
+@author (your name) @version (a version number or a date)</javadoc>
+    <imports>
+        <import target="greenfoot.*" enable="true"/>
+    </imports>
+    <implements/>
+    <fields>
+        <comment xml:space="preserve">(World, Actor, GreenfootImage, Greenfoot and MouseInfo)</comment>
+        <comment xml:space="preserve">Act - do whatever the Cannon wants to do. This method is called whenever the 'Act' or 'Run' button gets pressed in the environment.</comment>
+        <variable access="private" static="true" final="true" type="double" type-java="double" name="CANNON_BALL_VELOCITY" value="1500.0" value-java="1500.0" enable="true"/>
+    </fields>
+    <constructors/>
+    <methods>
+        <method access="public" type="void" type-java="void" name="act" enable="true">
+            <javadoc xml:space="preserve"/>
+            <params/>
+            <throws/>
+            <body>
+                <variable type="MouseInfo" type-java="MouseInfo" name="mouse" value="Greenfoot.getMouseInfo()" value-java="Greenfoot.getMouseInfo()" enable="true"/>
+                <variable type="Vector2D" type-java="Vector2D" name="cannonToMouse" value="new Vector2D(getX(),getY())" value-java=" new Vector2D(getX(), getY())" enable="true"/>
+                <call expression="alignWithVector(cannonToMouse)" expression-java="alignWithVector(cannonToMouse)" enable="true"/>
+                <if condition="Greenfoot.mouseClicked(null)" condition-java="Greenfoot.mouseClicked(null)" enable="true">
+                    <ifStatements>
+                        <call expression="cannonToMouse.normalize()" expression-java="cannonToMouse.normalize()" enable="true"/>
+                        <assign dest="cannonToMouse" dest-java="cannonToMouse" src="Vector2D.multiply(cannonToMouse,CANNON_BALL_VELOCITY)" src-java="Vector2D.multiply(cannonToMouse, CANNON_BALL_VELOCITY)" enable="true"/>
+                        <variable type="CannonBall" type-java="CannonBall" name="newBall" value="new CannonBall()" value-java=" new CannonBall()" enable="true"/>
+                        <call expression="newBall.setVelocity(cannonToMouse)" expression-java="newBall.setVelocity(cannonToMouse)" enable="true"/>
+                        <call expression="getWorld().addObject(newBall,getX(),getY())" expression-java="getWorld().addObject(newBall, getX(), getY())" enable="true"/>
+                    </ifStatements>
+                </if>
+            </body>
+        </method>
+        <comment xml:space="preserve">public void act() { if (mouse != null) { Vector2D cannonToMouse = new Vector2D(mouse.getX() - getY(), mouse.getY() - getY());
+double adjacent = cannonToMouse.getX(); double opposite = cannonToMouse.getY();
+double angleRadians = Math.atan2(opposite, adjacent); double angleDegrees = Math.toDegrees(angleRadians);
+setRotation((int) angleDegrees); } }</comment>
+        <method access="public" type="void" type-java="void" name="alignWithVector" enable="true">
+            <javadoc xml:space="preserve"/>
+            <params>
+                <params type="Vector2D" type-java="Vector2D" name="v"/>
+            </params>
+            <throws/>
+            <body>
+                <variable type="double" type-java="double" name="adjacent" value="v.getX()" value-java="v.getX()" enable="true"/>
+                <variable type="double" type-java="double" name="opposite" value="v.getY()" value-java="v.getY()" enable="true"/>
+                <variable type="double" type-java="double" name="angleRadians" value="Math.atan2(opposite,adjacent)" value-java="Math.atan2(opposite, adjacent)" enable="true"/>
+                <variable type="double" type-java="double" name="angleDegrees" value="Math.toDegrees(angleRadians)" value-java="Math.toDegrees(angleRadians)" enable="true"/>
+                <call expression="setRotation((int)angleDegrees)" expression-java="setRotation((int)angleDegrees)" enable="true"/>
+            </body>
+        </method>
+    </methods>
+</class>
